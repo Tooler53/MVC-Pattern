@@ -21,6 +21,4 @@ require_once(ROOT . '/components/Router.php');
 $router = new Router();
 $router->run();
 
-/*echo '<pre>';
-print_r($segments);
-echo '</pre>';*/
+echo 'index';

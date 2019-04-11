@@ -8,5 +8,13 @@
 
 class News
 {
+    public function getNewsById($id)
+    {
 
+    }
+
+    public function getNewsList()
+    {
+
+    }
 }

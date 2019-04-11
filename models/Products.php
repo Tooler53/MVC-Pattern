@@ -8,5 +8,13 @@
 
 class Products
 {
+    public function getProductsById($id)
+    {
 
+    }
+
+    public function getProductsList()
+    {
+
+    }
 }
