@@ -6,6 +6,8 @@
  * Time: 20:32
  */
 
+include_once ROOT . '/models/News.php';
+
 class NewsController
 {
     /**
@@ -14,7 +16,14 @@ class NewsController
      */
     public function actionIndex()
     {
-        echo 'NewsController/index';
+        $newsList = array();
+
+        $newsList = News::getNewsList();
+
+        echo '<pre>';
+        print_r($newsList);
+        echo '</pre>';
+
         return true;
     }
 
@@ -24,12 +33,17 @@ class NewsController
      * @param $id
      * @return bool
      */
-    public  function actionView($category, $id){
+    public function actionView($category, $id)
+    {
+        if ($id || $category) {
+            $newsItem = News::getNewsById($id, $category);
 
-        echo '<br>'.$category;
-        echo '<br>'.$id;
-        echo '<br>';
-        echo 'Просмотр одной записи News';
+            echo '<pre>';
+            print_r($newsItem);
+            echo '</pre>';
+
+            echo 'actionView';
+        }
         return true;
     }
 }
