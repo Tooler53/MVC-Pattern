@@ -7,7 +7,7 @@
  */
 
 /**
- * Class News
+ * Class news
  */
 class News
 {
@@ -22,22 +22,30 @@ class News
         $category = strval($category);
 
         if ($id && $category) {
-            $host = 'localhost';
-            $dbname = 'mvc_db_project';
-            $user = 'root';
-            $password = '';
-            $db = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
+            $db = Db::getConnection();
+            $hasCategory = $db->prepare('select * from news_category where name = :name');
+            $hasCategory->bindParam(':name', $category);
+            $hasCategory->execute();
+            $row = $hasCategory->fetch(PDO::FETCH_ASSOC);
+            if ($row != null) {
+                $result = $db->prepare('select * from news where id=:id and category=:category order by date, category');
+                $result->bindParam(':id', $id);
+                $result->bindParam(':category', $row['id']);
+                $result->execute();
+                $newsItem = $result->fetch(PDO::FETCH_ASSOC);
 
-            $result = $db->prepare('select * from news n join news_category nc on nc.id = n.category where n.id=:id and nc.name=:category order by n.date, n.category');
-            $result->bindParam(':id', $id);
-            $result->bindParam(':category', $category);
-
-            $result->execute();
-
-            $result->setFetchMode(PDO::FETCH_ASSOC);
-            $newsItem = $result->fetch();
-
-            return $newsItem;
+                if ($newsItem != null) {
+                    return $newsItem;
+                } else {
+                    return array(
+                        'error' => 'Такой новости нет.'
+                    );
+                }
+            } else {
+                return array(
+                    'error' => 'Такой категории нет.'
+                );
+            }
         }
     }
 
@@ -46,23 +54,17 @@ class News
      */
     public static function getNewsList()
     {
-        $host = 'localhost';
-        $dbname = 'mvc_db_project';
-        $user = 'root';
-        $password = '';
-        $db = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
+        $db = Db::getConnection();
 
         $newsList = array();
 
-        $result = $db->query('select * from news order by date, category');
-
+        $result = $db->query('select n.id,n.title,n.short_content, n.date, nc.name as category_name from news n join news_category nc on nc.id = n.category order by n.date, n.category');
         $i = 0;
         while ($row = $result->fetch()) {
             $newsList[$i]['id'] = $row['id'];
             $newsList[$i]['title'] = $row['title'];
             $newsList[$i]['date'] = $row['date'];
-            $newsList[$i]['category'] = $row['category'];
-            $newsList[$i]['content'] = $row['content'];
+            $newsList[$i]['category'] = $row['category_name'];
             $newsList[$i]['short_content'] = $row['short_content'];
             $i++;
         }

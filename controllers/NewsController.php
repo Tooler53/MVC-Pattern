@@ -17,12 +17,11 @@ class NewsController
     public function actionIndex()
     {
         $newsList = array();
-
         $newsList = News::getNewsList();
 
-        echo '<pre>';
-        print_r($newsList);
-        echo '</pre>';
+        if ($newsList != null) {
+            require_once(ROOT . '/views/news/index.php');
+        }
 
         return true;
     }
@@ -37,12 +36,13 @@ class NewsController
     {
         if ($id || $category) {
             $newsItem = News::getNewsById($id, $category);
-
-            echo '<pre>';
-            print_r($newsItem);
-            echo '</pre>';
-
-            echo 'actionView';
+            if (empty($newsItem['error'])) {
+                require_once(ROOT . '/views/news/view.php');
+            } else {
+                echo '<pre><b style="color: red">';
+                print_r($newsItem['error']);
+                echo '</b></pre>';
+            }
         }
         return true;
     }

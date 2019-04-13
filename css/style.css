@@ -1,0 +1,52 @@
+.news-table {
+    background: #fff;
+}
+
+.news-table > thead > tr > th {
+    padding: 5px;
+}
+
+.news-table > tbody > tr > td {
+    padding: 5px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+nav > ul > li {
+    list-style: none;
+    border-bottom: 1px solid #ffb33f;
+    padding-bottom: 10px;
+    font-size: 20px;
+    width: 90%;
+}
+
+nav > ul > li:hover {
+    color: #fff;
+    border-bottom: 1px solid #fff;
+}
+
+/*nav > ul > li > a:hover*/
+
+.btn {
+    padding: 5px 20px;
+    background: #8aff95;
+    border: 1px solid #08ff52;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background: #d2ffca;
+}
+
+.header {
+    height: 150px;
+    background: #61c8ff
+}
+
+.footer {
+    height: 100px;
+    background: #a1ff72
+}

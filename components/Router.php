@@ -17,7 +17,7 @@ class Router
     public function getUri()
     {
         if (!empty($_SERVER['REQUEST_URI'])) {
-            return trim($_SERVER['REQUEST_URI'] , '/');
+            return trim($_SERVER['REQUEST_URI'], '/');
         }
     }
 
@@ -38,7 +38,7 @@ class Router
                 $internalRoute = preg_replace("~$uriPattern~", $path, $uri);
 
                 $segments = explode('/', $internalRoute);
-                
+
                 $controllerName = array_shift($segments) . 'Controller';
                 $controllerName = ucfirst($controllerName);
                 $actionName = 'action' . ucfirst(array_shift($segments));
