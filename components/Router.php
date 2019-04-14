@@ -1,5 +1,7 @@
 <?php
 
+namespace components;
+
 class Router
 {
     private $routes;
@@ -39,19 +41,12 @@ class Router
 
                 $segments = explode('/', $internalRoute);
 
-                $controllerName = array_shift($segments) . 'Controller';
-                $controllerName = ucfirst($controllerName);
+                $controllerName = ucfirst(array_shift($segments) . 'Controller');
                 $actionName = 'action' . ucfirst(array_shift($segments));
                 $parameters = $segments;
-                $controllerFile = ROOT . '/controllers/' . $controllerName . '.php';
 
-                if (file_exists($controllerFile)) {
-                    include_once($controllerFile);
-                } else {
-                    echo 'error! page doesn\'t exist!';
-                }
-
-                $controllerObject = new $controllerName;
+                $controllerName = 'controllers\\'.$controllerName;
+                $controllerObject = new $controllerName();
 
                 $result = call_user_func_array(array($controllerObject, $actionName), $parameters);
 

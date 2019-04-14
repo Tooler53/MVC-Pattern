@@ -7,18 +7,22 @@
 /**
  * Отображение ошибок во время разработки. Когда сайт перейдет на прод необходимо перевести в значение 0
  */
+
+
+//use components\components\Router;
+
+use components\Router;
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 //2. Подключение файлов системы
 define('ROOT', dirname(__FILE__));
-require_once(ROOT . '/components/Router.php');
 
-//3. Установка соединения с БД
-require_once(ROOT . "/components/Db.php");
+//3. Подключение автозагрузчика
+require_once ROOT.'/vendor/autoload.php';
 
 //4. Вызов Router
-
 require_once(ROOT.'/views/parts/header.php');
 require_once(ROOT.'/views/parts/content.php');
 $router = new Router();

@@ -6,6 +6,8 @@
  * Time: 21:19
  */
 
+namespace models;
+
 class Products
 {
     public function getProductsById($id)

@@ -6,7 +6,7 @@
  * Time: 17:49
  */
 
-require_once(ROOT . '/components/Functions.php')
+use components\Functions;
 
 ?>
 <div style="background: #ffd1cf; padding: 10px; margin-top: 16px; width: 100%; margin-left: 10px">

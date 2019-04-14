@@ -6,6 +6,8 @@
  * Time: 18:56
  */
 
+namespace components;
+
 class Functions
 {
     public static function shortText($text)

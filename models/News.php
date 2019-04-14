@@ -6,6 +6,11 @@
  * Time: 21:18
  */
 
+namespace models;
+
+use components\Db;
+use PDO;
+
 /**
  * Class news
  */

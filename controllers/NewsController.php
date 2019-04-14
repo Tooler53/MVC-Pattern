@@ -6,7 +6,9 @@
  * Time: 20:32
  */
 
-include_once ROOT . '/models/News.php';
+namespace controllers;
+
+use models\News;
 
 class NewsController
 {

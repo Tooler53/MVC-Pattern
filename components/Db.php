@@ -6,6 +6,12 @@
  * Time: 17:18
  */
 
+namespace components;
+
+//use PDO;
+
+use PDO;
+
 class Db
 {
     public static function getConnection()

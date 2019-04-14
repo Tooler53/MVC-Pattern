@@ -6,6 +6,8 @@
  * Time: 20:32
  */
 
+namespace controllers;
+
 class ProductsController
 {
     public function actionList()
