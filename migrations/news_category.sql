@@ -8,3 +8,9 @@ ALTER TABLE `news_category`
 
 ALTER TABLE `news_category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+INSERT INTO `news_category` (`id`, `name`) VALUES
+(1, 'sport'),
+(2, 'games'),
+(3, 'programms'),
+(4, 'cinema');
