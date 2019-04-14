@@ -9,6 +9,7 @@
 namespace models;
 
 use components\Db;
+use components\Functions;
 use PDO;
 
 /**
@@ -16,12 +17,14 @@ use PDO;
  */
 class News
 {
+    const SHOW_BY_DEFAULT = 3;
+
     /**
      * @param $id
      * @param $category
      * @return mixed
      */
-    public static function getNewsById($id, $category)
+    public static function getNewsById($id = false, $category = false)
     {
         $id = intval($id);
         $category = strval($category);
@@ -57,23 +60,37 @@ class News
     /**
      * @return array
      */
-    public static function getNewsList()
+    public static function getNewsList($page = 1)
     {
+        $offset = ($page - 1) * self::SHOW_BY_DEFAULT;
+
         $db = Db::getConnection();
 
         $newsList = array();
 
-        $result = $db->query('select n.id,n.title,n.short_content, n.date, nc.name as category_name from news n join news_category nc on nc.id = n.category order by n.date, n.category');
+        $result = $db->query('select n.id, n.title, n.short_content, n.date, nc.name as category_name from news n join news_category nc on nc.id = n.category order by n.date, n.category limit ' . self::SHOW_BY_DEFAULT . ' OFFSET ' . $offset);
+
         $i = 0;
-        while ($row = $result->fetch()) {
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             $newsList[$i]['id'] = $row['id'];
             $newsList[$i]['title'] = $row['title'];
-            $newsList[$i]['date'] = $row['date'];
+            $newsList[$i]['date'] = Functions::shortText($row['date']);
             $newsList[$i]['category'] = $row['category_name'];
             $newsList[$i]['short_content'] = $row['short_content'];
             $i++;
         }
 
         return $newsList;
+    }
+
+    public static function getTotalNews()
+    {
+        $db = Db::getConnection();
+
+        $result = $db->query('select count(id) as count from news');
+
+        $row = $result->fetch(PDO::FETCH_ASSOC);
+
+        return $row['count'];
     }
 }

@@ -17,5 +17,7 @@
     <title>MVC</title>
 </head>
 <div class="header">
-
+    <a href="/" style="margin: 20px">
+        <div style="border: 1px solid black; height: 50px; width: 50px"></div>
+    </a>
 </div>

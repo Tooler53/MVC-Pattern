@@ -8,8 +8,6 @@
 
 namespace components;
 
-//use PDO;
-
 use PDO;
 
 class Db
@@ -19,6 +17,6 @@ class Db
         $paramsPath = ROOT . '/config/db_params.php';
         $params = include($paramsPath);
 
-        return new PDO("mysql:host={$params['host']};dbname={$params['dbname']}", $params['user'], $params['password']);
+        return new PDO("mysql:host={$params['host']};dbname={$params['dbname']}", $params['user'], $params['password'], array(PDO::ATTR_ERRMODE => true));
     }
 }

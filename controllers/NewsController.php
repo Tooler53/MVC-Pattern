@@ -8,6 +8,7 @@
 
 namespace controllers;
 
+use components\Pagination;
 use models\News;
 
 class NewsController
@@ -16,10 +17,13 @@ class NewsController
      * Данный экшен возвращает все новости из бд
      * @return bool
      */
-    public function actionIndex()
+    public function actionIndex($page = 1)
     {
         $newsList = array();
-        $newsList = News::getNewsList();
+        $newsList = News::getNewsList($page);
+        $total = News::getTotalNews();
+
+        $pagination = new Pagination($total, $page, News::SHOW_BY_DEFAULT, '');
 
         if ($newsList != null) {
             require_once(ROOT . '/views/news/index.php');

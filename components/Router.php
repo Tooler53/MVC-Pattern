@@ -33,7 +33,6 @@ class Router
     public function run()
     {
         $uri = $this->getUri();
-
         foreach ($this->routes as $uriPattern => $path) {
             if (preg_match("~$uriPattern~", $uri)) {
 
@@ -45,8 +44,8 @@ class Router
                 $actionName = 'action' . ucfirst(array_shift($segments));
                 $parameters = $segments;
 
-                $controllerName = 'controllers\\'.$controllerName;
-                $controllerObject = new $controllerName();
+                $controllerName = 'controllers\\' . $controllerName;
+                $controllerObject = new $controllerName;
 
                 $result = call_user_func_array(array($controllerObject, $actionName), $parameters);
 
