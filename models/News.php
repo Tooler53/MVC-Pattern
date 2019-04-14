@@ -20,9 +20,9 @@ class News
     const SHOW_BY_DEFAULT = 3;
 
     /**
-     * @param $id
-     * @param $category
-     * @return mixed
+     * @param int $id
+     * @param string $category
+     * @return array|mixed
      */
     public static function getNewsById($id = false, $category = false)
     {
@@ -58,6 +58,7 @@ class News
     }
 
     /**
+     * @param int $page
      * @return array
      */
     public static function getNewsList($page = 1)
@@ -83,6 +84,10 @@ class News
         return $newsList;
     }
 
+    /**
+     * Метод возвращает количество новостей в бд
+     * @return mixed
+     */
     public static function getTotalNews()
     {
         $db = Db::getConnection();

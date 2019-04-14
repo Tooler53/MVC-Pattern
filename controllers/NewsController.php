@@ -11,15 +11,20 @@ namespace controllers;
 use components\Pagination;
 use models\News;
 
+/**
+ * Class NewsController
+ * @package controllers
+ */
+
 class NewsController
 {
     /**
      * Данный экшен возвращает все новости из бд
+     * @param int $page
      * @return bool
      */
     public function actionIndex($page = 1)
     {
-        $newsList = array();
         $newsList = News::getNewsList($page);
         $total = News::getTotalNews();
 
