@@ -7,6 +7,7 @@
  */
 
 ?>
+<<<<<<< HEAD
 <div style="display: flex; flex-direction: row; height: 60vh; margin-bottom: 1vh;">
     <div style="width: 200px; margin-right: 10px; height: 100%">
         <nav style="background: #ffd682; height: 100%">
