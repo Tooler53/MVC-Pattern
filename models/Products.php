@@ -6,13 +6,21 @@
  * Time: 21:19
  */
 
+namespace models;
+
 class Products
 {
+    /**
+     * @param $id
+     */
     public function getProductsById($id)
     {
 
     }
 
+    /**
+     * 
+     */
     public function getProductsList()
     {
 

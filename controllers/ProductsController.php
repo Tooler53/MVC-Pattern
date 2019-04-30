@@ -6,6 +6,8 @@
  * Time: 20:32
  */
 
+namespace controllers;
+
 class ProductsController
 {
     public function actionList()
@@ -14,10 +16,10 @@ class ProductsController
         return true;
     }
 
-    public  function actionView($category, $id){
-
-        echo '<br>'.$category;
-        echo '<br>'.$id;
+    public function actionView($category, $id)
+    {
+        echo '<br>' . $category;
+        echo '<br>' . $id;
         echo '<br>';
         echo 'Просмотр одной записи Products';
         return true;

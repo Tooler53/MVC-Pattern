@@ -6,23 +6,33 @@
  * Time: 20:32
  */
 
-include_once ROOT . '/models/News.php';
+namespace controllers;
+
+use components\Pagination;
+use models\News;
+
+/**
+ * Class NewsController
+ * @package controllers
+ */
 
 class NewsController
 {
     /**
      * Данный экшен возвращает все новости из бд
+     * @param int $page
      * @return bool
      */
-    public function actionIndex()
+    public function actionIndex($page = 1)
     {
-        $newsList = array();
+        $newsList = News::getNewsList($page);
+        $total = News::getTotalNews();
 
-        $newsList = News::getNewsList();
+        $pagination = new Pagination($total, $page, News::SHOW_BY_DEFAULT, '');
 
-        echo '<pre>';
-        print_r($newsList);
-        echo '</pre>';
+        if ($newsList != null) {
+            require_once(ROOT . '/views/news/index.php');
+        }
 
         return true;
     }
@@ -37,12 +47,13 @@ class NewsController
     {
         if ($id || $category) {
             $newsItem = News::getNewsById($id, $category);
-
-            echo '<pre>';
-            print_r($newsItem);
-            echo '</pre>';
-
-            echo 'actionView';
+            if (empty($newsItem['error'])) {
+                require_once(ROOT . '/views/news/view.php');
+            } else {
+                echo '<pre><b style="color: red">';
+                print_r($newsItem['error']);
+                echo '</b></pre>';
+            }
         }
         return true;
     }

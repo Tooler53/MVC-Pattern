@@ -1,0 +1,21 @@
+{
+    "name": "k.yarilin/mvc-pattern",
+    "description": "mvc example",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Konstantin",
+            "email": "tooler53@mail.ru"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "models\\":"models",
+            "controllers\\": "controllers",
+            "components\\": "components"
+        }
+    }
+}
